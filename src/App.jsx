@@ -7,6 +7,34 @@ export default function Page() {
   const [yesPressed, setYesPressed] = useState(false);
   const yesButtonSize = noCount * 20 + 16;
 
+  const yesImages = [
+    "https://drive.google.com/file/d/1-B0-x25lzXqluV67ZheA27WyOSedppty/view?usp=sharing",
+    "https://drive.google.com/file/d/1Kov_27pIqvhSjQGJRAW1_q4WpykC3G6m/view?usp=sharing",
+    "https://drive.google.com/file/d/18gojHPzd-IgpatS5i-KjdnFchXQlzN59/view?usp=drive_link",
+
+  ];
+
+  const noImages = [
+    "https://drive.google.com/file/d/1P1qBZGxTKkNZ8qzBFw9ybzsAvZlutUOJ/view?usp=sharing",
+    "https://drive.google.com/file/d/12AybA85ARslA2Yr4TVtfaGTnkai5S9Eg/view?usp=sharing",
+    "https://drive.google.com/file/d/1NFPo7iqs8dHXTcs4VqZKyIq8u8LnYWRE/view?usp=drive_link",
+    "https://drive.google.com/file/d/1TXE2jjwa-vL21MoGmHpygP_bzCcYNQQq/view?usp=drive_link",
+    "https://drive.google.com/file/d/1xKJFlg3SIdjGcCR-nnX_VQyC60_KoZ1Q/view?usp=drive_link",
+    "https://drive.google.com/file/d/1gXu5F09opaM33wJ8WHyCslDVMlpz6917/view?usp=sharing",
+  ];
+
+  const shuffleArray = (array) => {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  };
+
+  const [shuffledYesImages] = useState(() => shuffleArray(yesImages));
+  const [shuffledNoImages] = useState(() => shuffleArray(noImages));
+
   const handleNoClick = () => {
     setNoCount(noCount + 1);
   };
@@ -45,6 +73,16 @@ export default function Page() {
           <div className="text-4xl md:text-6xl font-bold my-4">
             Ok Yayyyyy!!!
           </div>
+          <div className="flex flex-wrap justify-center gap-4 mt-6 max-w-4xl">
+            {shuffledYesImages.map((img, index) => (
+              <img
+                key={index}
+                src={img}
+                alt={`yes-${index}`}
+                className="w-24 h-24 md:w-32 md:h-32 rounded-full object-cover shadow-lg border-4 border-rose-300"
+              />
+            ))}
+          </div>
         </>
       ) : (
         <>
@@ -78,6 +116,18 @@ export default function Page() {
               {noCount === 0 ? "No" : getNoButtonText()}
             </button>
           </div>
+          {noCount > 0 && (
+            <div className="flex flex-wrap justify-center gap-4 mt-6 max-w-4xl">
+              {shuffledNoImages.map((img, index) => (
+                <img
+                  key={index}
+                  src={img}
+                  alt={`no-${index}`}
+                  className="w-20 h-20 md:w-24 md:h-24 rounded-full object-cover shadow-lg border-4 border-blue-300"
+                />
+              ))}
+            </div>
+          )}
         </>
       )}
       <Footer />
