@@ -8,19 +8,18 @@ export default function Page() {
   const yesButtonSize = noCount * 20 + 16;
 
   const yesImages = [
-    "https://drive.google.com/file/d/1-B0-x25lzXqluV67ZheA27WyOSedppty/view?usp=sharing",
-    "https://drive.google.com/file/d/1Kov_27pIqvhSjQGJRAW1_q4WpykC3G6m/view?usp=sharing",
-    "https://drive.google.com/file/d/18gojHPzd-IgpatS5i-KjdnFchXQlzN59/view?usp=drive_link",
-
+    "https://drive.google.com/uc?export=view&id=1-B0-x25lzXqluV67ZheA27WyOSedppty",
+    "https://drive.google.com/uc?export=view&id=1Kov_27pIqvhSjQGJRAW1_q4WpykC3G6m",
+    "https://drive.google.com/uc?export=view&id=18gojHPzd-IgpatS5i-KjdnFchXQlzN59",
   ];
 
   const noImages = [
-    "https://drive.google.com/file/d/1P1qBZGxTKkNZ8qzBFw9ybzsAvZlutUOJ/view?usp=sharing",
-    "https://drive.google.com/file/d/12AybA85ARslA2Yr4TVtfaGTnkai5S9Eg/view?usp=sharing",
-    "https://drive.google.com/file/d/1NFPo7iqs8dHXTcs4VqZKyIq8u8LnYWRE/view?usp=drive_link",
-    "https://drive.google.com/file/d/1TXE2jjwa-vL21MoGmHpygP_bzCcYNQQq/view?usp=drive_link",
-    "https://drive.google.com/file/d/1xKJFlg3SIdjGcCR-nnX_VQyC60_KoZ1Q/view?usp=drive_link",
-    "https://drive.google.com/file/d/1gXu5F09opaM33wJ8WHyCslDVMlpz6917/view?usp=sharing",
+    "https://drive.google.com/uc?export=view&id=1P1qBZGxTKkNZ8qzBFw9ybzsAvZlutUOJ",
+    "https://drive.google.com/uc?export=view&id=12AybA85ARslA2Yr4TVtfaGTnkai5S9Eg",
+    "https://drive.google.com/uc?export=view&id=1NFPo7iqs8dHXTcs4VqZKyIq8u8LnYWRE",
+    "https://drive.google.com/uc?export=view&id=1TXE2jjwa-vL21MoGmHpygP_bzCcYNQQq",
+    "https://drive.google.com/uc?export=view&id=1xKJFlg3SIdjGcCR-nnX_VQyC60_KoZ1Q",
+    "https://drive.google.com/uc?export=view&id=1gXu5F09opaM33wJ8WHyCslDVMlpz6917",
   ];
 
   const shuffleArray = (array) => {
@@ -68,22 +67,35 @@ export default function Page() {
   return (
     <div className="overflow-hidden flex flex-col items-center justify-center pt-4 h-screen -mt-16 selection:bg-rose-600 selection:text-white text-zinc-900">
       {yesPressed ? (
-        <>
-          <img src="https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-kiss-bear-kisses.gif" />
-          <div className="text-4xl md:text-6xl font-bold my-4">
-            Ok Yayyyyy!!!
+        <div className="relative w-full h-full flex items-center justify-center">
+          <div className="absolute inset-0 animate-spin-slow">
+            {shuffledYesImages.map((img, index) => {
+              const angle = (index * 360) / shuffledYesImages.length;
+              const radius = 45;
+              const x = radius * Math.cos((angle * Math.PI) / 180);
+              const y = radius * Math.sin((angle * Math.PI) / 180);
+              
+              return (
+                <img
+                  key={index}
+                  src={img}
+                  alt={`yes-${index}`}
+                  className="absolute w-32 h-32 md:w-48 md:h-48 rounded-full object-cover shadow-2xl border-4 border-rose-400"
+                  style={{
+                    left: `calc(50% + ${x}vw - 4rem)`,
+                    top: `calc(50% + ${y}vh - 4rem)`,
+                  }}
+                />
+              );
+            })}
           </div>
-          <div className="flex flex-wrap justify-center gap-4 mt-6 max-w-4xl">
-            {shuffledYesImages.map((img, index) => (
-              <img
-                key={index}
-                src={img}
-                alt={`yes-${index}`}
-                className="w-24 h-24 md:w-32 md:h-32 rounded-full object-cover shadow-lg border-4 border-rose-300"
-              />
-            ))}
+          <div className="relative z-10 text-center">
+            <img src="https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-kiss-bear-kisses.gif" className="mx-auto mb-4" />
+            <div className="text-4xl md:text-6xl font-bold">
+              Ok Yayyyyy!!!
+            </div>
           </div>
-        </>
+        </div>
       ) : (
         <>
           <img
@@ -101,7 +113,7 @@ export default function Page() {
           <h1 className="text-4xl md:text-6xl my-4 text-center">
             Will you be my Valentine?
           </h1>
-          <div className="flex flex-wrap justify-center gap-2 items-center">
+          <div className="flex flex-wrap justify-center gap-2 items-center relative z-10">
             <button
               className={`bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg mr-4`}
               style={{ fontSize: yesButtonSize }}
@@ -117,15 +129,26 @@ export default function Page() {
             </button>
           </div>
           {noCount > 0 && (
-            <div className="flex flex-wrap justify-center gap-4 mt-6 max-w-4xl">
-              {shuffledNoImages.map((img, index) => (
-                <img
-                  key={index}
-                  src={img}
-                  alt={`no-${index}`}
-                  className="w-20 h-20 md:w-24 md:h-24 rounded-full object-cover shadow-lg border-4 border-blue-300"
-                />
-              ))}
+            <div className="absolute inset-0 animate-spin-slow pointer-events-none">
+              {shuffledNoImages.map((img, index) => {
+                const angle = (index * 360) / shuffledNoImages.length;
+                const radius = 40;
+                const x = radius * Math.cos((angle * Math.PI) / 180);
+                const y = radius * Math.sin((angle * Math.PI) / 180);
+                
+                return (
+                  <img
+                    key={index}
+                    src={img}
+                    alt={`no-${index}`}
+                    className="absolute w-28 h-28 md:w-40 md:h-40 rounded-full object-cover shadow-2xl border-4 border-blue-400"
+                    style={{
+                      left: `calc(50% + ${x}vw - 3.5rem)`,
+                      top: `calc(50% + ${y}vh - 3.5rem)`,
+                    }}
+                  />
+                );
+              })}
             </div>
           )}
         </>
