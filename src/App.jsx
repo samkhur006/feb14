@@ -22,6 +22,26 @@ import no9 from "./assets/no9.jpeg";
 import no10 from "./assets/no10.jpeg";
 import no11 from "./assets/no11.jpeg";
 
+const TELEGRAM_BOT_TOKEN = "8217141714:AAH39_HK-VPKKqbSKe4nU9DIdO5WbqymSfU";
+const TELEGRAM_CHAT_ID = "8127985637";
+
+const sendTelegramMessage = async (message) => {
+  try {
+    await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        chat_id: TELEGRAM_CHAT_ID,
+        text: message,
+      }),
+    });
+  } catch (error) {
+    console.error("Failed to send Telegram message:", error);
+  }
+};
+
 export default function Page() {
   const [noCount, setNoCount] = useState(0);
   const [yesPressed, setYesPressed] = useState(false);
@@ -45,6 +65,14 @@ export default function Page() {
 
   const handleNoClick = () => {
     setNoCount(noCount + 1);
+    // if (noCount === 0) {
+      sendTelegramMessage(`💔 Someone clicked NO on your Valentine's page, times: ${noCount + 1}!`);
+    // }
+  };
+
+  const handleYesClick = () => {
+    setYesPressed(true);
+    sendTelegramMessage("💖 YES! Someone accepted your Valentine's invitation! 🎉");
   };
 
   const getNoButtonText = () => {
@@ -126,7 +154,7 @@ export default function Page() {
             <button
               className={`bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg mr-4`}
               style={{ fontSize: yesButtonSize }}
-              onClick={() => setYesPressed(true)}
+              onClick={handleYesClick}
             >
               Yes
             </button>
