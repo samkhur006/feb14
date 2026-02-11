@@ -1,26 +1,35 @@
 import { useState } from "react";
 import lovesvg from "./assets/All You Need Is Love SVG Cut File.svg";
 import lovesvg2 from "./assets/Love In The Air SVG Cut File.svg";
+import yes1 from "./assets/yes1.jpeg";
+import yes2 from "./assets/yes2.jpeg";
+import yes3 from "./assets/yes3.jpeg";
+import yes4 from "./assets/yes4.jpeg";
+import yes5 from "./assets/yes5.jpeg";
+import yes6 from "./assets/yes6.jpeg";
+import yes7 from "./assets/yes7.jpeg";
+import yes8 from "./assets/yes8.jpeg";
+
+import no1 from "./assets/no1.jpeg";
+import no2 from "./assets/no2.jpeg";
+import no3 from "./assets/no3.jpeg";
+import no4 from "./assets/no4.jpeg";
+import no5 from "./assets/no5.jpeg";
+import no6 from "./assets/no6.jpeg";
+import no7 from "./assets/no7.jpeg";
+import no8 from "./assets/no8.jpeg";
+import no9 from "./assets/no9.jpeg";
+import no10 from "./assets/no10.jpeg";
+import no11 from "./assets/no11.jpeg";
 
 export default function Page() {
   const [noCount, setNoCount] = useState(0);
   const [yesPressed, setYesPressed] = useState(false);
   const yesButtonSize = noCount * 20 + 16;
 
-  const yesImages = [
-    "https://drive.google.com/uc?export=view&id=1-B0-x25lzXqluV67ZheA27WyOSedppty",
-    "https://drive.google.com/uc?export=view&id=1Kov_27pIqvhSjQGJRAW1_q4WpykC3G6m",
-    "https://drive.google.com/uc?export=view&id=18gojHPzd-IgpatS5i-KjdnFchXQlzN59",
-  ];
+  const yesImages = [yes1, yes2, yes3, yes4, yes5, yes6, yes7, yes8];
 
-  const noImages = [
-    "https://drive.google.com/uc?export=view&id=1P1qBZGxTKkNZ8qzBFw9ybzsAvZlutUOJ",
-    "https://drive.google.com/uc?export=view&id=12AybA85ARslA2Yr4TVtfaGTnkai5S9Eg",
-    "https://drive.google.com/uc?export=view&id=1NFPo7iqs8dHXTcs4VqZKyIq8u8LnYWRE",
-    "https://drive.google.com/uc?export=view&id=1TXE2jjwa-vL21MoGmHpygP_bzCcYNQQq",
-    "https://drive.google.com/uc?export=view&id=1xKJFlg3SIdjGcCR-nnX_VQyC60_KoZ1Q",
-    "https://drive.google.com/uc?export=view&id=1gXu5F09opaM33wJ8WHyCslDVMlpz6917",
-  ];
+  const noImages = [no1, no2, no3, no4, no5, no6, no7, no8, no9, no10, no11];
 
   const shuffleArray = (array) => {
     const shuffled = [...array];
@@ -71,7 +80,7 @@ export default function Page() {
           <div className="absolute inset-0 animate-spin-slow">
             {shuffledYesImages.map((img, index) => {
               const angle = (index * 360) / shuffledYesImages.length;
-              const radius = 45;
+              const radius = 40;
               const x = radius * Math.cos((angle * Math.PI) / 180);
               const y = radius * Math.sin((angle * Math.PI) / 180);
               
@@ -80,10 +89,10 @@ export default function Page() {
                   key={index}
                   src={img}
                   alt={`yes-${index}`}
-                  className="absolute w-32 h-32 md:w-48 md:h-48 rounded-full object-cover shadow-2xl border-4 border-rose-400"
+                  className="absolute w-64 h-64 md:w-80 md:h-80 rounded-full object-cover shadow-2xl border-4 border-rose-400"
                   style={{
-                    left: `calc(50% + ${x}vw - 4rem)`,
-                    top: `calc(50% + ${y}vh - 4rem)`,
+                    left: `calc(50% + ${x}vw - 8rem)`,
+                    top: `calc(50% + ${y}vh - 8rem)`,
                   }}
                 />
               );
@@ -141,10 +150,10 @@ export default function Page() {
                     key={index}
                     src={img}
                     alt={`no-${index}`}
-                    className="absolute w-28 h-28 md:w-40 md:h-40 rounded-full object-cover shadow-2xl border-4 border-blue-400"
+                    className="absolute w-64 h-64 md:w-80 md:h-80 rounded-full object-cover shadow-2xl border-4 border-blue-400"
                     style={{
-                      left: `calc(50% + ${x}vw - 3.5rem)`,
-                      top: `calc(50% + ${y}vh - 3.5rem)`,
+                      left: `calc(50% + ${x}vw - 8rem)`,
+                      top: `calc(50% + ${y}vh - 8rem)`,
                     }}
                   />
                 );
