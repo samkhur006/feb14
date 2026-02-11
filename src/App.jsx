@@ -21,6 +21,7 @@ import no8 from "./assets/no8.jpeg";
 import no9 from "./assets/no9.jpeg";
 import no10 from "./assets/no10.jpeg";
 import no11 from "./assets/no11.jpeg";
+import kopale from "./assets/kopale.png";
 
 const TELEGRAM_BOT_TOKEN = "8217141714:AAH39_HK-VPKKqbSKe4nU9DIdO5WbqymSfU";
 const TELEGRAM_CHAT_ID = "8127985637";
@@ -135,6 +136,18 @@ export default function Page() {
         </div>
       ) : (
         <>
+          {noCount >= 10 && (
+            <div className="fixed inset-0 grid grid-cols-3 md:grid-cols-4 gap-0 opacity-40 z-0">
+              {Array.from({ length: 12 }).map((_, index) => (
+                <img
+                  key={index}
+                  src={kopale}
+                  alt="kopale"
+                  className="w-full h-full object-cover"
+                />
+              ))}
+            </div>
+          )}
           <img
             src={lovesvg}
             className="fixed animate-pulse top-10 md:left-24 left-6 md:w-40 w-28"
